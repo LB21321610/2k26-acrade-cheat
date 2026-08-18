@@ -233,7 +233,8 @@ var sceneClasses=['scene-dunk','scene-buzzer','scene-champion'],sceneCursor=0;
 function makeCollapse(title,bodyFn){
   var c=document.createElement('div');c.className='collapsible scene-card '+sceneClasses[sceneCursor++%sceneClasses.length];
   var h=document.createElement('div');h.className='col-head';h.innerHTML='<span>'+title+'</span><span class="arrow" aria-hidden="true"></span>';
-  var b=document.createElement('div');b.className='col-body',bodyBuilt=false;
+  var b=document.createElement('div');b.className='col-body';
+  var bodyBuilt=false;
   h.setAttribute('role','button');h.setAttribute('tabindex','0');h.setAttribute('aria-expanded','false');
   function toggleCollapse(){
     var opening=!c.classList.contains('open');
