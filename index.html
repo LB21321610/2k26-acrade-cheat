@@ -72,14 +72,16 @@
   .collapsible .col-head:active{background:linear-gradient(90deg,rgba(31,69,108,.55),rgba(11,15,22,.22))}
   .collapsible .arrow{width:8px;height:8px;margin-right:3px;border-top:2px solid rgba(255,255,255,.68);border-right:2px solid rgba(255,255,255,.68);transform:rotate(45deg);transition:transform .28s cubic-bezier(.2,.8,.2,1),border-color .2s ease}
   .collapsible.open .arrow{transform:rotate(135deg);border-color:#9fd0ff}
-  .collapsible .col-body{position:relative;z-index:2;max-height:0;overflow:hidden;opacity:0;padding:0 9px;border-top:1px solid transparent;background:rgba(5,8,12,.45);transform:translateY(-4px);transition:max-height .32s cubic-bezier(.2,.8,.2,1),opacity .2s ease,padding .28s ease,border-color .28s ease,transform .28s ease}
-  .collapsible.open .col-body{opacity:1;padding:9px;border-color:rgba(255,255,255,.09);transform:translateY(0)}
+  .collapsible .col-body{position:relative;z-index:2;max-height:0;overflow:hidden;visibility:hidden;padding:9px;border-top:1px solid transparent;background:rgba(5,8,12,.45)}
+  .collapsible.open .col-body{max-height:none;visibility:visible;border-color:rgba(255,255,255,.09)}
+  .collapsible.open .col-body>*{animation:optionIn .22s cubic-bezier(.2,.8,.2,1) both}
   .anim-stack{margin-top:7px}
-  @keyframes headerDrop{from{opacity:0;transform:translate3d(0,-8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+  @keyframes headerDrop{from{transform:translate3d(0,-8px,0)}to{transform:translate3d(0,0,0)}}
   @keyframes headerSheen{0%,68%{transform:translate3d(-180%,0,0) rotate(14deg)}86%,100%{transform:translate3d(620%,0,0) rotate(14deg)}}
   @keyframes livePulse{0%,100%{transform:scale(.9);opacity:.72}50%{transform:scale(1.28);opacity:1}}
-  @keyframes panelIn{from{opacity:0;transform:translate3d(0,6px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-  @keyframes cardIn{from{opacity:0;transform:translate3d(0,9px,0) scale(.985)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+  @keyframes panelIn{from{transform:translate3d(0,6px,0)}to{transform:translate3d(0,0,0)}}
+  @keyframes cardIn{from{transform:translate3d(0,9px,0) scale(.985)}to{transform:translate3d(0,0,0) scale(1)}}
+  @keyframes optionIn{from{transform:translate3d(0,4px,0)}to{transform:translate3d(0,0,0)}}
   @keyframes statusPulse{0%{transform:translateZ(0) scale(.985);border-color:rgba(94,230,173,.48)}100%{transform:translateZ(0) scale(1)}}
   @media(max-width:355px){.topbar{min-height:64px;padding-left:10px;padding-right:10px}.topbar h1{font-size:17px}.grid.tri{grid-template-columns:repeat(2,minmax(0,1fr))}.btn{font-size:10px}.scroll{padding-left:6px;padding-right:6px}.scene-card{padding:8px}.sel-row label{width:60px}}
   @media(min-width:480px){body{left:50%;right:auto;width:460px;transform:translateX(-50%);border-left:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08);box-shadow:0 0 80px rgba(0,0,0,.7)}}
@@ -127,13 +129,11 @@ var jz=0,careerDz0=0,editDz0=0,currentMode='career';
 
 function switchMode(m){
   currentMode=m;
-  requestAnimationFrame(function(){
-    document.querySelectorAll('.mode-btn').forEach(function(b,i){b.classList.toggle('active',m==='career'?i===0:i===1)});
-    document.getElementById('panel-career').classList.toggle('active',m==='career');
-    document.getElementById('panel-edit').classList.toggle('active',m==='edit');
-    document.querySelector('.scroll').scrollTop=0;
-    locate();
-  });
+  document.querySelectorAll('.mode-btn').forEach(function(b,i){b.classList.toggle('active',m==='career'?i===0:i===1)});
+  document.getElementById('panel-career').classList.toggle('active',m==='career');
+  document.getElementById('panel-edit').classList.toggle('active',m==='edit');
+  document.querySelector('.scroll').scrollTop=0;
+  locate();
 }
 function getJz(){var m=h5gg.getRangesList(0);if(!m||!m.length){alert('取基址失败');return 0}jz=Number(m[0].start);return jz}
 function getCareerBase(){getJz();var r=Number(h5gg.getValue(jz+CAREER_OFF,"I64")),p2=Number(h5gg.getValue(r+0xF0,"I64"));careerDz0=p2+0x548;return careerDz0}
@@ -239,8 +239,8 @@ function makeCollapse(title,bodyFn){
     var opening=!c.classList.contains('open');
     if(opening&&!bodyBuilt){bodyFn(b);bodyBuilt=true}
     c.classList.toggle('open',opening);h.setAttribute('aria-expanded',opening?'true':'false');
-    if(opening){b.style.maxHeight='0px';requestAnimationFrame(function(){b.style.maxHeight=b.scrollHeight+'px'})}
-    else{b.style.maxHeight=b.scrollHeight+'px';requestAnimationFrame(function(){b.style.maxHeight='0px'})}
+    if(opening){b.style.maxHeight='none'}
+    else{b.style.maxHeight='0px'}
   }
   h.addEventListener('click',toggleCollapse);
   h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleCollapse()}});
