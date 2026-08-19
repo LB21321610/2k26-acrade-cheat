@@ -20,6 +20,12 @@ Single-file H5GG interface for NBA2K26 1.50.
 - 隔扣、隐藏扣篮、空接、混合度、出手速度、咬牙套
 - 主场/客场球鞋、面部编辑（测试）
 
+### Streetball Mode
+- 街头夜晚球馆、还原球馆
+- 110能力、满徽章、满倾向
+- 隔扣、隐藏扣篮、空接、混合度、出手速度、咬牙套
+- 年龄修改、面部编辑、清除球鞋数据
+
 ## GitHub Pages
 
 - Entry point: `index.html`
