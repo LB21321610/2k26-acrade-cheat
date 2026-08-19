@@ -103,22 +103,27 @@
 
   <!-- ===== CAREER ===== -->
   <div id="panel-career" class="panel active">
-    <section class="scene-card scene-champion"><div class="sec">MY CAREER</div><div class="grid"><button class="btn b-green" onclick="doAttr()">满属性条</button></div></section>
-    <section class="scene-card scene-dunk"><div class="sec">PLAYER EDITOR</div><div class="grid tri"><button class="btn b-red" onclick="do110()">110能力</button><button class="btn b-red" onclick="doBadge()">满徽章</button><button class="btn b-red" onclick="doTendency()">满倾向</button></div></section>
-    <section class="scene-card scene-buzzer"><div class="sec">QUICK ACTIONS</div><div class="grid tri"><button class="btn b-green" onclick="doPosterizer()">满隔扣</button><button class="btn b-green" onclick="doHiddenDunk()">隐藏扣篮</button><button class="btn b-green" onclick="doAlleyOop()">满空接</button><button class="btn b-blue" onclick="doBlend()">混合度100</button><button class="btn b-blue" onclick="doReleaseSpeed()">出手最快</button><button class="btn b-blue" onclick="doMouthguard()">咬牙套</button></div></section>
-    <section class="scene-card scene-champion"><div class="sec">AGE</div><div class="sel-row"><label>年龄</label><input id="age-career" type="number" min="18" max="45" value="25"><button class="btn b-blue" style="min-height:40px;padding:5px 13px;font-size:10px;flex:0 0 auto" onclick="doAge('age-career')">设置</button></div></section>
-    <section class="scene-card scene-champion"><div class="sec">CAREER RESOURCES</div><div class="grid"><button class="btn b-purple" onclick="doCareerSP()">生涯点数 1.2亿</button><button class="btn b-purple" onclick="doFans()">粉丝数量 999万</button></div></section>
-    <section class="scene-card scene-dunk"><div class="sec">CUSTOMIZE</div><div class="grid"><button class="btn b-blue" onclick="doCustomAttr()">自定义属性(25)</button><button class="btn b-blue" onclick="doBadgePoints()">徽章自由加点</button><button class="btn b-green" onclick="doFaceEdit()">面部编辑(测试)</button></div></section>
+    <section class="scene-card scene-champion"><div class="sec">生涯功能</div><div class="grid"><button class="btn b-green" onclick="doAttr()">全99建模</button><button class="btn b-green" onclick="doShoufa()">一键生涯首发</button><button class="btn b-green" onclick="doCreate99()">建档99属性</button><button class="btn b-purple" onclick="doCareerSP()">生涯点数 1.2亿</button><button class="btn b-purple" onclick="doBadgePoints()">徽章点数 999万</button><button class="btn b-purple" onclick="doFans()">球迷数量 999万</button></div></section>
+    <section class="scene-card scene-dunk"><div class="sec">球员编辑</div><div class="grid tri"><button class="btn b-red" onclick="do110()">110属性</button><button class="btn b-red" onclick="doTendency()">满倾向</button><button class="btn b-red" onclick="doBadge()">满徽章</button><button class="btn b-blue" onclick="doCustomAttr()">自定义属性</button><button class="btn b-blue" onclick="doBestEver()">史上最强奖励</button><button class="btn b-blue" onclick="doSeasonMax()">赛季满级奖励</button></div></section>
+    <section class="scene-card scene-buzzer"><div class="sec">球星操作</div><div class="grid"><button class="btn b-green" onclick="doTihua(1)">删除原球星</button><button class="btn b-green" onclick="doTihua(2)">复刻球星属性徽章</button></div></section>
+    <section class="scene-card scene-champion"><div class="sec">代言/主宰</div><div class="sel-row"><label>球鞋代言</label><select onchange="doEndorsement(this.value)"><option value="">请选择</option><option value="1">NIKE</option><option value="2">Adidas</option><option value="3">Jordan</option><option value="5">匡威</option></select></div><div class="sel-row"><label>主要主宰</label><select onchange="doTakeover(0,this.value)"><option value="">请选择</option><option value="0">切入高手</option><option value="1">定点射手</option><option value="2">组织核心</option><option value="3">锁定防守</option><option value="4">篮板好手</option></select></div></section>
+    <section class="scene-card scene-buzzer"><div class="sec">DNA操作</div><div class="grid"><button class="btn b-blue" onclick="doDNAOut()">导出生涯DNA</button><button class="btn b-blue" onclick="doDNAIn()">导入生涯DNA</button><button class="btn b-green" onclick="doAllTattoo()">一键全纹身</button></div></section>
+    <section class="scene-card scene-champion"><div class="sec">年龄</div><div class="sel-row"><label>年龄</label><input id="age-career" type="number" min="16" max="50" value="25"><button class="btn b-blue" style="min-height:40px;padding:5px 13px;font-size:10px;flex:0 0 auto" onclick="doAge('age-career')">设置</button></div></section>
     <div id="anim-sections-career" class="anim-stack"></div>
     <div class="hint">进入生涯模式后点击。基于 career 基址。</div>
   </div>
 
   <!-- ===== EDIT ===== -->
   <div id="panel-edit" class="panel">
-    <section class="scene-card scene-dunk"><div class="sec">PLAYER EDITOR</div><div class="grid tri"><button class="btn b-red" onclick="do110()">110能力</button><button class="btn b-red" onclick="doBadge()">满徽章</button><button class="btn b-red" onclick="doTendency()">满倾向</button></div></section>
-    <section class="scene-card scene-champion"><div class="sec">AGE</div><div class="sel-row"><label>年龄</label><input id="age-edit" type="number" min="18" max="45" value="25"><button class="btn b-blue" style="min-height:40px;padding:5px 13px;font-size:10px;flex:0 0 auto" onclick="doAge('age-edit')">设置</button></div></section>
-    <section class="scene-card scene-buzzer"><div class="sec">SHOES</div><div class="grid"><button class="btn b-green" onclick="doHomeShoe()">主场球鞋 ID:5</button><button class="btn b-green" onclick="doAwayShoe()">客场球鞋 ID:5</button><button class="btn b-blue" onclick="doFaceEdit()">面部编辑(测试)</button></div></section>
-    <section class="scene-card scene-buzzer"><div class="sec">QUICK ACTIONS</div><div class="grid tri"><button class="btn b-green" onclick="doPosterizer()">满隔扣</button><button class="btn b-green" onclick="doHiddenDunk()">隐藏扣篮</button><button class="btn b-green" onclick="doAlleyOop()">满空接</button><button class="btn b-blue" onclick="doBlend()">混合度100</button><button class="btn b-blue" onclick="doReleaseSpeed()">出手最快</button><button class="btn b-blue" onclick="doMouthguard()">咬牙套</button></div></section>
+    <section class="scene-card scene-dunk"><div class="sec">资料选项</div><div class="sel-row"><label>名字</label><input id="profile-name" type="text" placeholder="请输入名字" style="width:100px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetName(document.getElementById('profile-name').value)">设置</button></div><div class="sel-row"><label>姓氏</label><input id="profile-surname" type="text" placeholder="请输入姓氏" style="width:100px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetSurname(document.getElementById('profile-surname').value)">设置</button></div><div class="sel-row"><label>身高</label><input id="profile-height" type="number" placeholder="英寸" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetHeight(document.getElementById('profile-height').value)">设置</button></div><div class="sel-row"><label>体重</label><input id="profile-weight" type="number" placeholder="磅" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetWeight(document.getElementById('profile-weight').value)">设置</button></div><div class="sel-row"><label>号码</label><input id="profile-number" type="number" min="0" max="100" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetNumber(document.getElementById('profile-number').value)">设置</button></div><div class="sel-row"><label>年龄</label><input id="age-edit" type="number" min="16" max="50" value="25" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doAge('age-edit')">设置</button></div></section>
+    <section class="scene-card scene-champion"><div class="sec">身份信息</div><div class="sel-row"><label>面部ID</label><input id="profile-faceid" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetFaceID(document.getElementById('profile-faceid').value)">设置</button></div><div class="sel-row"><label>照片ID</label><input id="profile-photoid" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetPhotoID(document.getElementById('profile-photoid').value)">设置</button></div><div class="sel-row"><label>唯一ID</label><input id="profile-uniqueid" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetUniqueID(document.getElementById('profile-uniqueid').value)">设置</button></div><div class="sel-row"><label>选秀年</label><input id="profile-draftyear" type="number" placeholder="1996" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetDraftYear(document.getElementById('profile-draftyear').value)">设置</button></div><div class="sel-row"><label>轮次</label><input id="profile-draftround" type="number" min="1" max="3" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetDraftRound(document.getElementById('profile-draftround').value)">设置</button></div><div class="sel-row"><label>顺位</label><input id="profile-draftpick" type="number" min="1" max="60" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetDraftPick(document.getElementById('profile-draftpick').value)">设置</button></div></section>
+    <section class="scene-card scene-buzzer"><div class="sec">位置/惯用手</div><div class="sel-row"><label>位置</label><select onchange="doSetPosition(this.value)"><option value="">请选择</option><option value="PG">PG 控卫</option><option value="SG">SG 分卫</option><option value="SF">SF 小前</option><option value="PF">PF 大前</option><option value="C">C 中锋</option></select></div><div class="sel-row"><label>惯用手</label><select onchange="doSetHand(this.value)"><option value="">请选择</option><option value="R">右手</option><option value="L">左手</option></select></div><div class="sel-row"><label>主控</label><select onchange="doSetPrimary(this.value)"><option value="">请选择</option><option value="1">是</option><option value="0">否</option></select></div><div class="sel-row"><label>隐藏发型</label><input id="profile-hair" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetHiddenHair(document.getElementById('profile-hair').value)">设置</button></div></section>
+    <section class="scene-card scene-dunk"><div class="sec">球员编辑</div><div class="grid tri"><button class="btn b-red" onclick="do110()">110属性</button><button class="btn b-red" onclick="doTendency()">满倾向</button><button class="btn b-red" onclick="doBadge()">满徽章</button></div></section>
+    <section class="scene-card scene-champion"><div class="sec">外观选项</div><div class="sel-row"><label>臂展</label><input id="appear-wingspan" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetWingspan(document.getElementById('appear-wingspan').value)">设置</button></div><div class="sel-row"><label>身材</label><input id="appear-bodytype" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetBodyType(document.getElementById('appear-bodytype').value)">设置</button></div><div class="sel-row"><label>身长</label><input id="appear-bodylength" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetBodyLength(document.getElementById('appear-bodylength').value)">设置</button></div><div class="sel-row"><label>手长</label><input id="appear-handlength" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetHandLength(document.getElementById('appear-handlength').value)">设置</button></div><div class="sel-row"><label>肩宽</label><input id="appear-shoulder" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetShoulderWidth(document.getElementById('appear-shoulder').value)">设置</button></div><div class="sel-row"><label>手掌</label><input id="appear-palm" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetPalm(document.getElementById('appear-palm').value)">设置</button></div><div class="sel-row"><label>脖子</label><input id="appear-neck" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetNeck(document.getElementById('appear-neck').value)">设置</button></div></section>
+    <section class="scene-card scene-buzzer"><div class="sec">头发/肤色</div><div class="sel-row"><label>头发</label><input id="appear-hair" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetHair(document.getElementById('appear-hair').value)">设置</button></div><div class="sel-row"><label>发型</label><input id="appear-hairstyle" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetHairstyle(document.getElementById('appear-hairstyle').value)">设置</button></div><div class="sel-row"><label>发色</label><input id="appear-haircolor" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetHairColor(document.getElementById('appear-haircolor').value)">设置</button></div><div class="sel-row"><label>胡茬</label><input id="appear-stubble" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetStubble(document.getElementById('appear-stubble').value)">设置</button></div><div class="sel-row"><label>肤色</label><input id="appear-skin" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetSkinTone(document.getElementById('appear-skin').value)">设置</button></div><button class="btn b-green" style="width:100%;margin-top:6px" onclick="doHiddenFace()">隐藏捏脸</button></section>
+    <section class="scene-card scene-champion"><div class="sec">护具选项</div><div class="sel-row"><label>上半身1</label><input id="equip-upper1" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetUpperEquip(1,document.getElementById('equip-upper1').value)">设置</button></div><div class="sel-row"><label>上半身2</label><input id="equip-upper2" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetUpperEquip(2,document.getElementById('equip-upper2').value)">设置</button></div><div class="sel-row"><label>下半身1</label><input id="equip-lower1" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetLowerEquip(1,document.getElementById('equip-lower1').value)">设置</button></div><div class="sel-row"><label>下半身2</label><input id="equip-lower2" type="number" style="width:80px"><button class="btn b-blue" style="min-height:30px;padding:3px 10px;font-size:10px;flex:0 0 auto" onclick="doSetLowerEquip(2,document.getElementById('equip-lower2').value)">设置</button></div></section>
+    <section class="scene-card scene-buzzer"><div class="sec">球鞋选项</div><div class="grid"><button class="btn b-green" onclick="doHomeShoe()">主场球鞋 ID:5</button><button class="btn b-green" onclick="doAwayShoe()">客场球鞋 ID:5</button></div></section>
+    <section class="scene-card scene-dunk"><div class="sec">动作包</div><div class="grid tri"><button class="btn b-green" onclick="doPosterizer()">满隔扣</button><button class="btn b-green" onclick="doHiddenDunk()">隐藏扣篮</button><button class="btn b-green" onclick="doAlleyOop()">满空接</button><button class="btn b-blue" onclick="doBlend()">混合度100</button><button class="btn b-blue" onclick="doReleaseSpeed()">出手最快</button><button class="btn b-blue" onclick="doMouthguard()">咬牙套</button></div></section>
     <div id="anim-sections-edit" class="anim-stack"></div>
     <div class="hint">在阵容/王朝的"编辑球员"界面执行。基于 edit 基址。</div>
   </div>
@@ -301,6 +306,174 @@ function doJumpshot(){
   h5gg.setValue(dz+0x10C,String(v0*1024+v2*1048576),"I32");
   h5gg.setValue(dz+0x110,String(v1),"I16");
   show('投篮包: '+shot_names[v0]+'/'+shot_names[v1]+'/'+shot_names[v2]+' OK');
+}
+
+// === CAREER FUNCTIONS ===
+
+function doShoufa(){
+  var dz=getDz0();
+  var base=Number(h5gg.getValue(dz-0x8,"I64"));
+  if(!base||base===0){show("首发指针为空");return}
+  h5gg.setValue(base+0x1C,"6","I8");
+  show("一键生涯首发 OK");
+}
+
+function doCreate99(){
+  show("建档99属性：需在新建存档的选模板界面使用（偏移异常，暂不可用）");
+}
+
+function doBestEver(){
+  show("史上最强奖励：原始数据缺失，暂不可用");
+}
+
+function doSeasonMax(){
+  show("赛季满级奖励：原始偏移NaN，暂不可用");
+}
+
+function doEndorsement(val){
+  show("球鞋代言切换："+val+"（需逆向h5gg调用数据）");
+}
+
+function doTakeover(slot,val){
+  show("主宰切换："+slot+"="+val+"（需逆向h5gg调用数据）");
+}
+
+function doDNAOut(){
+  show("导出生涯DNA：需逆向DNA序列化逻辑");
+}
+
+function doDNAIn(){
+  show("导入生涯DNA：需逆向DNA反序列化逻辑");
+}
+
+function doTihua(mode){
+  show(mode===1?"删除原球星":"复刻球星属性徽章"+"（需逆向tihua函数）");
+}
+
+function doAllTattoo(){
+  show("全纹身：setallws ASCII编码复杂，需逆向");
+}
+
+// === PROFILE OPTIONS ===
+
+function doSetName(val){
+  show("设置名字："+val+"（需逆向setplayer('名字')偏移）");
+}
+function doSetSurname(val){
+  show("设置姓氏："+val+"（需逆向setplayer('姓氏')偏移）");
+}
+function doSetHeight(val){
+  show("设置身高："+val+"（需逆向setplayer('身高')偏移）");
+}
+function doSetWeight(val){
+  show("设置体重："+val+"（需逆向setplayer('体重')偏移）");
+}
+function doSetNumber(val){
+  show("设置号码："+val+"（需逆向setplayer('号码')偏移）");
+}
+function doSetFaceID(val){
+  show("设置面部ID："+val+"（需逆向setplayer('面部')偏移）");
+}
+function doSetPhotoID(val){
+  show("设置照片ID："+val+"（需逆向setplayer('照片')偏移）");
+}
+function doSetUniqueID(val){
+  show("设置唯一ID："+val+"（需逆向setplayer('唯一ID')偏移）");
+}
+function doSetDraftYear(val){
+  show("设置选秀年："+val+"（需逆向setplayer('选秀年')偏移）");
+}
+function doSetDraftRound(val){
+  show("设置选秀轮次："+val+"（需逆向setplayer('轮次')偏移）");
+}
+function doSetDraftPick(val){
+  show("设置选秀顺位："+val+"（需逆向setplayer('顺位')偏移）");
+}
+function doSetPosition(val){
+  show("设置位置："+val+"（需逆向setplayer('位置')偏移）");
+}
+function doSetHand(val){
+  show("设置惯用手："+val+"（需逆向setplayer('惯用手')偏移）");
+}
+function doSetPrimary(val){
+  show("设置主控："+val+"（需逆向setplayer('主控')偏移）");
+}
+function doSetHiddenHair(val){
+  show("设置隐藏发型："+val+"（需逆向偏移）");
+}
+
+// === APPEARANCE OPTIONS ===
+
+function doSetWingspan(val){
+  show("设置臂展："+val+"（需逆向偏移）");
+}
+function doSetBodyType(val){
+  show("设置身材："+val+"（需逆向偏移）");
+}
+function doSetBodyLength(val){
+  show("设置身长："+val+"（需逆向偏移）");
+}
+function doSetHandLength(val){
+  show("设置手长："+val+"（需逆向偏移）");
+}
+function doSetShoulderWidth(val){
+  show("设置肩宽："+val+"（需逆向偏移）");
+}
+function doSetPalm(val){
+  show("设置手掌："+val+"（需逆向偏移）");
+}
+function doSetNeck(val){
+  show("设置脖子："+val+"（需逆向偏移）");
+}
+function doSetHair(val){
+  show("设置头发："+val+"（需逆向偏移）");
+}
+function doSetHairstyle(val){
+  show("设置发型："+val+"（需逆向偏移）");
+}
+function doSetHairColor(val){
+  show("设置发色："+val+"（需逆向偏移）");
+}
+function doSetStubble(val){
+  show("设置胡茬："+val+"（需逆向偏移）");
+}
+function doSetSkinTone(val){
+  show("设置肤色："+val+"（需逆向偏移）");
+}
+function doHiddenFace(){
+  show("隐藏捏脸：需逆向cface完整数据");
+}
+
+// === EQUIPMENT OPTIONS ===
+
+function doSetUpperEquip(slot,val){
+  show("上半身护具"+slot+"："+val+"（需逆向偏移）");
+}
+function doSetLowerEquip(slot,val){
+  show("下半身护具"+slot+"："+val+"（需逆向偏移）");
+}
+
+// === FACE EDIT FULL ===
+
+var cface_names=['头部预设','头骨预设','头骨高度','头骨宽度','耳朵类型','耳垂角度','耳朵上部角度','耳朵旋转','耳朵尺寸','眉骨','眉骨突出度','太阳穴宽度','眉间距离','眉骨位置','眼部','眼睛大小','眼间距离','眼睛角度','上眼睑位置','上眼睑皱皱','下眼睑位置','鼻子','鼻子上部宽度','鼻子下部宽度','鼻子位置','鼻子上部突出度','鼻子中部突出度','鼻子下部突出度','脸颊','脸颊上部宽度','脸颊中部宽度','嘴巴','嘴巴宽度','上嘴唇厚度','上嘴唇突出度','上嘴唇人中','下嘴唇厚度','下嘴突出度','下巴','下巴酒窝','下巴突出度','下巴前部宽度','下巴后部宽度','下巴位置'];
+var cface_ban=[1,2,5,10,15,22,29,32,39];
+var cface_ban1=[33,4,11,4,8,23,5,13,5];
+
+function doFaceEditFull(slot,value){
+  var dz=getDz0();
+  var niedz=Number(h5gg.getValue(dz+0x28,"I64"));
+  if(!niedz||niedz===0){show("面部指针为空");return}
+  var v=parseInt(value);
+  if(isNaN(v)){show("请输入有效数值");return}
+  if(cface_ban.includes(slot)){
+    var maxIdx=cface_ban.indexOf(slot);
+    if(v<1||v>cface_ban1[maxIdx]){show("范围1~"+cface_ban1[maxIdx]);return}
+  }else{
+    if(v<1||v>20){show("范围1~20");return}
+    v=v*13-Math.ceil(v/4);
+  }
+  h5gg.setValue(niedz+slot-1,v,"I8");
+  show(cface_names[slot-1]+" 已更改");
 }
 
 // === ANIMATION SELECTOR DATA ===
