@@ -96,6 +96,7 @@
 <div class="mode-bar">
   <button class="mode-btn active" onclick="switchMode('career')">MyCareer 生涯</button>
   <button class="mode-btn" onclick="switchMode('edit')">编辑球员</button>
+  <button class="mode-btn" onclick="switchMode('street')">街头篮球</button>
 </div>
 <div class="scroll">
   <div id="status">正在初始化…</div>
@@ -121,6 +122,17 @@
     <div id="anim-sections-edit" class="anim-stack"></div>
     <div class="hint">在阵容/王朝的"编辑球员"界面执行。基于 edit 基址。</div>
   </div>
+
+  <!-- ===== STREET ===== -->
+  <div id="panel-street" class="panel">
+    <section class="scene-card scene-champion"><div class="sec">STREETBALL</div><div class="grid"><button class="btn b-green" onclick="doStreetCourt()">街头夜晚球馆</button><button class="btn b-blue" onclick="doResetCourt()">还原球馆</button></div></section>
+    <section class="scene-card scene-dunk"><div class="sec">PLAYER EDITOR</div><div class="grid tri"><button class="btn b-red" onclick="do110()">110能力</button><button class="btn b-red" onclick="doBadge()">满徽章</button><button class="btn b-red" onclick="doTendency()">满倾向</button></div></section>
+    <section class="scene-card scene-buzzer"><div class="sec">QUICK ACTIONS</div><div class="grid tri"><button class="btn b-green" onclick="doPosterizer()">满隔扣</button><button class="btn b-green" onclick="doHiddenDunk()">隐藏扣篮</button><button class="btn b-green" onclick="doAlleyOop()">满空接</button><button class="btn b-blue" onclick="doBlend()">混合度100</button><button class="btn b-blue" onclick="doReleaseSpeed()">出手最快</button><button class="btn b-blue" onclick="doMouthguard()">咬牙套</button></div></section>
+    <section class="scene-card scene-champion"><div class="sec">AGE</div><div class="sel-row"><label>年龄</label><input id="age-street" type="number" min="18" max="45" value="25"><button class="btn b-blue" style="min-height:40px;padding:5px 13px;font-size:10px;flex:0 0 auto" onclick="doAge('age-street')">设置</button></div></section>
+    <section class="scene-card scene-dunk"><div class="sec">STREET EXTRAS</div><div class="grid"><button class="btn b-purple" onclick="doDelWs()">清除球鞋数据</button><button class="btn b-blue" onclick="doFaceEdit()">面部编辑(测试)</button></div></section>
+    <div id="anim-sections-street" class="anim-stack"></div>
+    <div class="hint">街头模式功能。基于 career 基址。</div>
+  </div>
 </div>
 
 <script>
@@ -132,9 +144,11 @@ var jz=0,careerDz0=0,editDz0=0,currentMode='career';
 
 function switchMode(m){
   currentMode=m;
-  document.querySelectorAll('.mode-btn').forEach(function(b,i){b.classList.toggle('active',m==='career'?i===0:i===1)});
+  var modes=['career','edit','street'];
+  document.querySelectorAll('.mode-btn').forEach(function(b,i){b.classList.toggle('active',modes[i]===m)});
   document.getElementById('panel-career').classList.toggle('active',m==='career');
   document.getElementById('panel-edit').classList.toggle('active',m==='edit');
+  document.getElementById('panel-street').classList.toggle('active',m==='street');
   document.querySelector('.scroll').scrollTop=0;
   locate();
 }
@@ -144,7 +158,7 @@ function getEditBase(){getJz();var p1=Number(h5gg.getValue(jz+EDIT_OFF,"I64"))+0
 function getDz0(){return currentMode==='career'?getCareerBase():getEditBase()}
 var statusPulseFlip=false;
 function show(m){var s=document.getElementById('status');s.innerText=m;statusPulseFlip=!statusPulseFlip;s.classList.remove('pulse-a','pulse-b');requestAnimationFrame(function(){s.classList.add(statusPulseFlip?'pulse-a':'pulse-b')})}
-function locate(){if(H5GG_PREVIEW){show('界面预览 · 请在 H5GG 中运行');return}if(currentMode==='career'){getCareerBase();show('[生涯] '+careerDz0.toString(16))}else{getEditBase();show('[编辑] '+editDz0.toString(16))}}
+function locate(){if(H5GG_PREVIEW){show('界面预览 · 请在 H5GG 中运行');return}if(currentMode==='career'){getCareerBase();show('[生涯] '+careerDz0.toString(16))}else if(currentMode==='edit'){getEditBase();show('[编辑] '+editDz0.toString(16))}else{getCareerBase();show('[街头] '+careerDz0.toString(16))}}
 
 // === QUICK ACTIONS ===
 function doAttr(){getCareerBase();var pp=Number(h5gg.getValue(careerDz0+0x50,"I64"));for(var i=0x200;i<=0x241;i++)h5gg.setValue(pp+i,"99","I8");show('满属性条 OK')}
@@ -242,6 +256,43 @@ function doFaceEditSlot(slot,value){
   if(slot>=offsets.length){show("槽位超出范围");return}
   h5gg.setValue(fp+offsets[slot],String(value),"I8");
   show("面部槽位"+slot+"="+value+" OK");
+}
+
+// === NEW PORTED FUNCTIONS ===
+
+function doDelWs(){
+  var dz=getDz0();
+  var wp=Number(h5gg.getValue(dz+0x38,"I64"));
+  if(!wp||wp===0){show("球鞋指针为空");return}
+  for(var i=0;i<=0x4F8;i+=8)h5gg.setValue(wp+i,"0","I64");
+  show("清除球鞋数据 OK");
+}
+
+function doStreetCourt(){
+  var dz=getDz0();
+  var base=Number(h5gg.getValue(dz,"I64"));
+  citystadiumWrite(base,"f039");
+  show("街头夜晚球馆 OK");
+}
+
+function doResetCourt(){
+  var dz=getDz0();
+  var base=Number(h5gg.getValue(dz,"I64"));
+  citystadiumWrite(base,"f030");
+  show("还原球馆 OK");
+}
+
+function citystadiumWrite(base,prefix){
+  var offsets=[0x658,0x1958,0x2c58,0x3f58,0x5258,0x6558,0x7858,0x8b58,0x9e58,0xb158,0xc458,0xd758,0xea58,0xfd58,0x11058,0x12358,0x13658,0x14958,0x15c58,0x16f58,0x18258,0x19558,0x1a858,0x1bb58,0x1ce58,0x1e158,0x1f458,0x20758,0x21a58,0x22d58];
+  var woff=[-0x8,0x12f8,0x25f8,0x38f8,0x4bf8,0x5ef8,0x71f8,0x84f8,0x97f8,0xaaf8,0xbdf8,0xd0f8,0xe3f8,0xf6f8,0x109f8,0x11cf8,0x12ff8,0x142f8,0x155f8,0x168f8,0x17bf8,0x18ef8,0x1a1f8,0x1b4f8,0x1c7f8,0x1daf8,0x1edf8,0x200f8,0x213f8,0x226f8];
+  for(var i=0;i<offsets.length;i++){
+    h5gg.setValue(base+offsets[i],"34","I8");
+    h5gg.setValue(base+woff[i],"3211248","I32");
+    h5gg.setValue(base+woff[i]+4,"57","I32");
+    var p=prefix;
+    var v=parseInt(p[3]+p[1]+p[2]+p[0],16);
+    h5gg.setValue(base+woff[i]+8,String(v),"I32");
+  }
 }
 
 function doJumpshot(){
@@ -479,6 +530,7 @@ function buildAnimSections(containerId){
 // Build both panels
 buildAnimSections('anim-sections-career');
 buildAnimSections('anim-sections-edit');
+buildAnimSections('anim-sections-street');
 locate();
 </script>
 </body>
